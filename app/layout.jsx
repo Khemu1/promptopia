@@ -2,6 +2,7 @@ import "@styles/global.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import Head from "next/head";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Promptopia",
@@ -18,7 +19,7 @@ const RouteLayout = ({ children }) => {
           </div>
           <main className="app">
             <Nav />
-            {children}
+            <Suspense fallback={"loading"}>{children}</Suspense>
           </main>
         </Provider>
       </body>

@@ -6,7 +6,7 @@ import Form from "@components/Form";
 const UpdatePrompt = () => {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const [post, setPost] = useState({
     prompt: "",
     tag: "",
