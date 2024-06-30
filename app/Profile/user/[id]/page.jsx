@@ -25,7 +25,7 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <Profile user={username} decs="Welcome To Your Profile" posts={userPosts} />
+    <Profile user={username} UserDecs={`Welcome To ${username}'s Profile`} posts={userPosts} />
   );
 };
 

@@ -1,10 +1,11 @@
 import "@styles/global.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
+import Head from "next/head";
 
-export const metaData = {
+export const metadata = {
   title: "Promptopia",
-  description: "Discover & Share AI Prompts ",
+  description: "Discover & Share AI Prompts",
 };
 
 const RouteLayout = ({ children }) => {

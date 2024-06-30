@@ -20,8 +20,34 @@ const PromptList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
-  const handleSearch = (e) => {};
-  const handleTagClick = (e) => {};
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchResult, setSearchResult] = useState([]);
+
+  const filterSearch = (search) => {
+    const regex = new RegExp(search, "i");
+    return data.filter(
+      (post) =>
+        regex.test(post.userId.username) ||
+        regex.test(post.prompt) ||
+        regex.test(post.tag)
+    );
+  };
+
+  const handleSearch = (e) => {
+    clearTimeout(searchTimeout);
+    setSearch(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        setSearchResult(filterSearch(search));
+      }, 600)
+    );
+  };
+
+  const handleTagClick = (tag) => {
+    setSearch(tag);
+  };
+
   useEffect(() => {
     const fetchPrompts = async () => {
       const res = await fetch("/api/prompt");
@@ -38,11 +64,18 @@ const Feed = () => {
           type="text"
           placeholder="Search for a tag or a username"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            handleSearch(e);
+          }}
           className="search_input "
         />
       </form>
-      <PromptList data={data} handleTagClick={handleTagClick} />
+      {search ? (
+        <PromptList data={searchResult} handleTagClick={handleTagClick} />
+      ) : (
+        <PromptList data={data} handleTagClick={handleTagClick} />
+      )}
     </section>
   );
 };

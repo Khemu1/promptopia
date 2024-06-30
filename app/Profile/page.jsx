@@ -53,7 +53,7 @@ const MyProfile = () => {
 
   return (
     <Profile
-      name="My"
+      my="My"
       decs="Welcome To Your Profile"
       posts={myPosts}
       handleDelete={handleDeletePrompt}
