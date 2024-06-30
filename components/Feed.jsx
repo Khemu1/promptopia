@@ -40,12 +40,18 @@ const Feed = () => {
     setSearchTimeout(
       setTimeout(() => {
         setSearchResult(filterSearch(search));
-      }, 600)
+      }, 500)
     );
   };
 
   const handleTagClick = (tag) => {
+    clearTimeout(searchTimeout);
     setSearch(tag);
+    setSearchTimeout(
+      setTimeout(() => {
+        setSearchResult(filterSearch(tag));
+      }, 500)
+    );
   };
 
   useEffect(() => {
@@ -59,7 +65,12 @@ const Feed = () => {
   }, []);
   return (
     <section className="feed flex flex-col">
-      <form className="relative w-full flex-center">
+      <form
+        className="relative w-full flex-center"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <input
           type="text"
           placeholder="Search for a tag or a username"
