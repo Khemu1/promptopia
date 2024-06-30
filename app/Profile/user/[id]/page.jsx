@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams } from "next/navigation";
-import Profile from "@components/profile";
+import Profile from "@components/Profile";
 
 const UserProfile = () => {
   const [userPosts, setUserPosts] = useState(null);
