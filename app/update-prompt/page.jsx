@@ -1,11 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@components/Form";
 
 const UpdatePrompt = () => {
-  const { data: session } = useSession();
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true); // Loading state
@@ -57,13 +55,15 @@ const UpdatePrompt = () => {
   }, [promptId]);
 
   return (
-    <Form
-      type="Edit"
-      post={post}
-      setPost={setPost}
-      handleSubmit={handleUpdatePrompt}
-      submitting={submitting}
-    />
+    <Suspense>
+      <Form
+        type="Edit"
+        post={post}
+        setPost={setPost}
+        handleSubmit={handleUpdatePrompt}
+        submitting={submitting}
+      />
+    </Suspense>
   );
 };
 
