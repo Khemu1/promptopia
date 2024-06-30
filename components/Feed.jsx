@@ -20,7 +20,6 @@ const PromptList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
-  const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchResult, setSearchResult] = useState([]);
 
   const filterSearch = (search) => {
@@ -34,52 +33,37 @@ const Feed = () => {
   };
 
   const handleSearch = (e) => {
-    clearTimeout(searchTimeout);
-    setSearch(e.target.value);
-
-    setSearchTimeout(
-      setTimeout(() => {
-        setSearchResult(filterSearch(search));
-      }, 500)
-    );
+    const searchValue = e.target.value;
+    setSearch(searchValue);
+    setSearchResult(filterSearch(searchValue));
   };
 
   const handleTagClick = (tag) => {
-    clearTimeout(searchTimeout);
     setSearch(tag);
-    setSearchTimeout(
-      setTimeout(() => {
-        setSearchResult(filterSearch(tag));
-      }, 500)
-    );
+    setSearchResult(filterSearch(tag));
   };
 
   useEffect(() => {
     const fetchPrompts = async () => {
       const res = await fetch("/api/prompt");
       const data = await res.json();
-      console.log(data);
       setData(data);
     };
     fetchPrompts();
   }, []);
+
   return (
     <section className="feed flex flex-col">
       <form
         className="relative w-full flex-center"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
+        onSubmit={(e) => e.preventDefault()}
       >
         <input
           type="text"
           placeholder="Search for a tag or a username"
           value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            handleSearch(e);
-          }}
-          className="search_input "
+          onInput={handleSearch}
+          className="search_input"
         />
       </form>
       {search ? (
