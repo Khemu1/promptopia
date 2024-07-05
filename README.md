@@ -1,4 +1,4 @@
-# Car Showcase Project
+# Promptopia  Project
 
 ## Overview
 Promptopia is a web application designed to provide a platform for creating and sharing writing prompts. Users can explore various prompts, create their own, and engage with a community of writers. The project utilizes Next.js, React, Tailwind CSS, and integrates with MongoDB for data storage.
