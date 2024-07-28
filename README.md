@@ -6,7 +6,7 @@ Promptopia is a web application designed to provide a platform for creating and 
 ## Features
 - **Prompt Listings**
   - Browse a collection of writing prompts created by users.
-  - Each prompt includes details such as category, description, and user ratings.
+  - Each prompt includes details such as tag and description.
   
 - **Search and Filter**
   - Search prompts by keyword or filter by category to find specific prompts.
